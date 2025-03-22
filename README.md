@@ -15,7 +15,6 @@ Make sure you have the following installed before running the project:
 - **Node.js** (v16 or later)
 - **Expo CLI** (Install globally using `npm install -g expo-cli`)
 
-
 ## Installation
 
 1. **Clone the repository:**
@@ -51,18 +50,34 @@ Run the app:
 
 npx expo start
 
-
-
 ## Usage
 1. Open the app and select a driver.
 2. View the driver’s details and location on the map.
 3. See your own real-time location displayed on the map.
 4. Click "Request Ride" to simulate booking a ride.
 
-
-
 ⚠️ Important: Location Services
 
 expo-location does not work well on emulators/simulators.
 
 For a better user experience, use a physical device to test real-time location tracking.
+
+⚠️ Google API Key Configuration
+
+To use Google Maps services, generate a Google API Key and add it to `App.tsx`:
+
+```tsx
+import Geocoder from "react-native-geocoding";
+import { GOOGLE_MAPS_API_KEY } from "@env";
+
+Geocoder.init(GOOGLE_MAPS_API_KEY);
+```
+
+Ensure you store the key in a `.env` file: or just pass the apikeys directly in  Geocoder.init in app.tsx file
+
+```
+GOOGLE_MAPS_API_KEY=your_api_key_here
+```
+
+Follow the setup instructions in the README to ensure it loads correctly.
+

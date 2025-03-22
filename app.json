@@ -24,6 +24,12 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bbfc6a9f-91c8-4e9e-9d53-e150df1175b6"
+      }
+    },
+    "owner": "honcholex14"
   }
 }
