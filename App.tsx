@@ -6,7 +6,7 @@ import Geocoder from "react-native-geocoding";
 
 
 
-Geocoder.init("AIzaSyC8QH1e5GXogWWGLNt_ow5oQBG0M8Do96o"); // Replace with your API key
+Geocoder.init("AIzaSyC8QH1e5GXogWWGLNt_ow5oQBG0M8Do96o"); 
 
 
 export default function App() {
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    
   },
 });
