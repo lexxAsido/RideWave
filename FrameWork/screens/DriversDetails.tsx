@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView, Platform } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
@@ -61,7 +61,7 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
     <View className="flex-1 bg-white">
       <MapView
         style={styles.map}
-        provider={PROVIDER_GOOGLE}
+        provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
         initialRegion={{
           latitude: driver.location.latitude,
           longitude: driver.location.longitude,

@@ -3,9 +3,9 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import "./global.css"
 import { StackNavigation } from './FrameWork/Navigation/Stack';
 import Geocoder from "react-native-geocoding";
-import { GOOGLE_MAPS_API_KEY } from "@env";  // Import from dotenv
+import { GOOGLE_MAPS_API_KEY } from "@env";
 
-Geocoder.init(GOOGLE_MAPS_API_KEY); // Use the secure API key
+Geocoder.init(GOOGLE_MAPS_API_KEY); 
 
 export default function App() {
   return (

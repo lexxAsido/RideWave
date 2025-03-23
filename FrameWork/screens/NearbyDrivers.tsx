@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions, Image, ActivityIndicator, Alert } from "react-native";
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions, Image, ActivityIndicator, Alert, Platform } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Geocoder from "react-native-geocoding";
 import * as Location from "expo-location"; 
@@ -66,7 +66,7 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
         <>
           <MapView
             style={styles.map}
-            provider={PROVIDER_GOOGLE}
+            provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} 
             initialRegion={{
               latitude: userLocation?.latitude || 6.5244,
               longitude: userLocation?.longitude || 3.3792,
