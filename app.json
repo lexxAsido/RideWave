@@ -14,13 +14,13 @@
     },
     "ios": {
       "supportsTablet": true
-     
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.honcholex14.RideSharing"
     },
     "web": {
       "favicon": "./assets/favicon.png",

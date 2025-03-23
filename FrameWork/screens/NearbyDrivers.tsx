@@ -18,7 +18,6 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
   const [locations, setLocations] = useState<{ [key: string]: string }>({}); 
   const [loading, setLoading] = useState(true);
 
-  
   const fetchUserLocation = async () => {
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -37,7 +36,6 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
     }
   };
 
- 
   const fetchLocationName = async (driverId: string, latitude: number, longitude: number) => {
     try {
       const response = await Geocoder.from(latitude, longitude);
@@ -61,7 +59,7 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {loading ? (
-        <ActivityIndicator size="large" color="black" style={{ flex: 1 }} />
+        <ActivityIndicator size="large" color="black" style={styles.loader} />
       ) : (
         <>
           <MapView
@@ -102,10 +100,10 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
                 onPress={() => navigation.navigate("DriverDetail", { driverId: item.id })}
               >
                 <Image source={{ uri: item.image }} style={styles.driverImage} />
-                <View className="flex-1">
-                  <Text className="font-bold text-xl">{item.name}</Text>
-                  <Text className="text-gray-400 font-semibold">Car Model: {item.car}</Text>
-                  <Text className="mt-2 text-md">
+                <View style={styles.driverInfo}>
+                  <Text style={styles.driverName}>{item.name}</Text>
+                  <Text style={styles.carModel}>Car Model: {item.car}</Text>
+                  <Text style={styles.locationName}>
                     📍 {locations[item.id] || <ActivityIndicator size="small" color="black" />}
                   </Text>
                 </View>
@@ -120,6 +118,7 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
+  loader: { flex: 1 },
   map: { width: "100%", height: SCREEN_HEIGHT * 0.65 }, 
   listContainer: { padding: 14 },
   driverCard: {

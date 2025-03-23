@@ -22,18 +22,14 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
   const [driverLocationName, setDriverLocationName] = useState("Fetching...");
 
   useEffect(() => {
-    
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setUserLocationName("Permission denied");
         return;
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setUserLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude });
-
-      
       Geocoder.from(location.coords.latitude, location.coords.longitude)
         .then((json) => {
           const address = json.results[0]?.formatted_address;
@@ -45,7 +41,6 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
 
   useEffect(() => {
     if (driver) {
-     
       Geocoder.from(driver.location.latitude, driver.location.longitude)
         .then((json) => {
           const address = json.results[0]?.formatted_address;
@@ -58,7 +53,7 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
   if (!driver) return <Text style={styles.errorText}>Driver not found</Text>;
 
   return (
-    <View className="flex-1 bg-white">
+    <View style={styles.container}>
       <MapView
         style={styles.map}
         provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
@@ -69,10 +64,7 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
           longitudeDelta: 0.02,
         }}
       >
-       
         <Marker coordinate={driver.location} title={driver.name} description="Driver's Location" />
-
-        
         {userLocation && (
           <Marker
             coordinate={userLocation}
@@ -82,23 +74,20 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
           />
         )}
       </MapView>
-
       <ScrollView>
         <View style={styles.card}>
           <Image source={{ uri: driver.image }} style={styles.driverImage} />
-          <Text className="text-2xl font-bold mb-3">{driver.name}</Text>
+          <Text style={styles.driverName}>{driver.name}</Text>
           <Text style={styles.info}>🚗 Car Model: {driver.car}</Text>
           <Text style={styles.info}>⭐ Rating: {driver.rating}</Text>
           <Text style={styles.info}>📍 Driver Location: {driverLocationName}</Text>
           <Text style={styles.info}>📌 Your Location: {userLocationName}</Text>
-
-          <View className="w-full mt-10 flex-row justify-between">
-            <TouchableOpacity onPress={() => navigation.goBack()} className="bg-black rounded-lg p-3">
-              <Text className="text-yellow-500 font-bold text-center">Go Back</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+              <Text style={styles.backButtonText}>Go Back</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => alert("Ride Requested 🚗✅")} className="bg-yellow-500 rounded-lg p-3">
-              <Text className="text-center font-extrabold">Request Ride</Text>
+            <TouchableOpacity onPress={() => alert("Ride Requested 🚗✅")} style={styles.requestButton}>
+              <Text style={styles.requestButtonText}>Request Ride</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -108,6 +97,7 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "white" },
   map: { width: "100%", height: SCREEN_HEIGHT * 0.5 },
   card: {
     backgroundColor: "white",
@@ -122,8 +112,14 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   driverImage: { width: 100, height: 100, borderRadius: 50, marginBottom: 10 },
-  info: { fontSize: 16, marginBottom: 5,  },
+  driverName: { fontSize: 24, fontWeight: "bold", marginBottom: 8 },
+  info: { fontSize: 16, marginBottom: 5 },
   errorText: { textAlign: "center", marginTop: 20, fontSize: 18, color: "red" },
+  buttonContainer: { flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: 20 },
+  backButton: { backgroundColor: "black", borderRadius: 8, padding: 12, flex: 1, marginRight: 10, alignItems: "center" },
+  backButtonText: { color: "#FACC15", fontWeight: "bold" },
+  requestButton: { backgroundColor: "#FACC15", borderRadius: 8, padding: 12, flex: 1, marginLeft: 10, alignItems: "center" },
+  requestButtonText: { fontWeight: "bold" },
 });
 
 export default DriverDetails;
