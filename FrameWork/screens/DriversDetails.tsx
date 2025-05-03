@@ -56,7 +56,7 @@ const DriverDetails: React.FC<Props> = ({ navigation, route }) => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
+        // provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
         initialRegion={{
           latitude: driver.location.latitude,
           longitude: driver.location.longitude,

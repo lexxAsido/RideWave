@@ -64,7 +64,8 @@ const NearbyDrivers: React.FC<Props> = ({ navigation }) => {
         <>
           <MapView
             style={styles.map}
-            provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} 
+            // provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} 
+            // provider= {PROVIDER_GOOGLE}
             initialRegion={{
               latitude: userLocation?.latitude || 6.5244,
               longitude: userLocation?.longitude || 3.3792,

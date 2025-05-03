@@ -20,7 +20,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.honcholex14.RideSharing"
+      "package": "com.honcholex14.RideSharing",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC8QH1e5GXogWWGLNt_ow5oQBG0M8Do96o"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png",
